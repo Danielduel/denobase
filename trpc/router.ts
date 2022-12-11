@@ -17,7 +17,7 @@ const JOKES = [
 export const appRouter = router<TrpcCallerContext>()
   .query("joke", {
     resolve: () => {
-      return JOKES[~~((JOKES.length + 1) * Math.random())];
+      return JOKES[~~(JOKES.length * Math.random())];
     }
   });
 

@@ -9,7 +9,7 @@ import { queryClient } from "../radio/GlobalProviders.tsx";
 export const handler: Handlers = {
   async GET(req, ctx) {
     const jokeData = await trpc({ req }).query("joke");
-    queryClient.setQueryDefaults(["joke"], { initialData: jokeData });
+    queryClient.setQueryData(["joke"], jokeData);
 
     return ctx.render();
   }
