@@ -1,6 +1,6 @@
-import { HandlerContext } from "$fresh/server.ts";
+import { router } from "@trpc/server";
+import type { TrpcCallerContext } from "./TrpcCallerContext.d.ts";
 
-// Jokes courtesy of https://punsandoneliners.com/randomness/programmer-jokes/
 const JOKES = [
   "Why do Java developers often wear glasses? They can't C#.",
   "A SQL query walks into a bar, goes up to two tables and says “can I join you?”",
@@ -14,8 +14,11 @@ const JOKES = [
   "An SEO expert walked into a bar, pub, inn, tavern, hostelry, public house.",
 ];
 
-export const handler = (_req: Request, _ctx: HandlerContext): Response => {
-  const randomIndex = Math.floor(Math.random() * JOKES.length);
-  const body = JOKES[randomIndex];
-  return new Response(body);
-};
+export const appRouter = router<TrpcCallerContext>()
+  .query("joke", {
+    resolve: () => {
+      return JOKES[~~((JOKES.length + 1) * Math.random())];
+    }
+  });
+
+export type AppRouter = typeof appRouter;

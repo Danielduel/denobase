@@ -472,6 +472,7 @@ export class ServerContext {
             renderFn: this.#renderFn,
             url: new URL(req.url),
             params,
+            req,
             data,
             error,
           });

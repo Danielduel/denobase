@@ -1,5 +1,6 @@
 import { ComponentType, h, options, render } from "preact";
 import { assetHashingHook } from "./utils.ts";
+import { GlobalProviders } from "../../../radio/GlobalProviders.tsx";
 
 function createRootFragment(
   parent: Element,
@@ -42,7 +43,13 @@ export function revive(islands: Record<string, ComponentType>, props: any[]) {
 
       const [id, n] = tag.split(":");
       render(
-        h(islands[id], props[Number(n)]),
+        h(
+          GlobalProviders,
+          {
+            // @ts-ignore it is fine
+            children: h(islands[id], props[Number(n)])
+          }
+        ),
         createRootFragment(
           parent! as HTMLElement,
           children,

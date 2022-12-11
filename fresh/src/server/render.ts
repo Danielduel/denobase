@@ -18,6 +18,8 @@ import { ContentSecurityPolicy } from "../runtime/csp.ts";
 import { bundleAssetUrl } from "./constants.ts";
 import { assetHashingHook } from "../runtime/utils.ts";
 import { htmlEscapeJsonString } from "./htmlescape.ts";
+import { GlobalProviders } from "../../../radio/GlobalProviders.tsx";
+import { getTrpcCallerContext } from "../../../trpc/serverSideTrpc.ts";
 
 export interface RenderOptions<Data> {
   route: Route<Data> | UnknownPage | ErrorPage;
@@ -32,6 +34,7 @@ export interface RenderOptions<Data> {
   data?: Data;
   error?: unknown;
   lang?: string;
+  req: Request;
 }
 
 export type InnerRenderFunction = () => string;
@@ -114,6 +117,7 @@ export async function render<Data>(
     url: opts.url,
     route: opts.route.pattern,
     data: opts.data,
+    trpcCallerContext: getTrpcCallerContext(opts)
   };
   if (opts.error) {
     props.error = opts.error;
@@ -126,12 +130,15 @@ export async function render<Data>(
 
   const vnode = h(CSP_CONTEXT.Provider, {
     value: csp,
-    children: h(HEAD_CONTEXT.Provider, {
-      value: headComponents,
-      children: h(opts.app.default, {
-        Component() {
-          return h(opts.route.component! as ComponentType<unknown>, props);
-        },
+    children: h(GlobalProviders, {
+      // @ts-ignore it is fine
+      children: h(HEAD_CONTEXT.Provider, {
+        value: headComponents,
+        children: h(opts.app.default, {
+          Component() {
+            return h(opts.route.component! as ComponentType<unknown>, props);
+          },
+        }),
       }),
     }),
   });

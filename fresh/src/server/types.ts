@@ -1,4 +1,5 @@
 import { ComponentType } from "preact";
+import type { TrpcCallerContext } from "../../../trpc/TrpcCallerContext.d.ts";
 import { ConnInfo, rutt, ServeInit } from "./deps.ts";
 import { InnerRenderFunction, RenderContext } from "./render.ts";
 
@@ -52,6 +53,8 @@ export interface PageProps<T = any> {
    * `undefined`.
    */
   data: T;
+
+  trpcCallerContext: TrpcCallerContext;
 }
 
 export interface RouteConfig {

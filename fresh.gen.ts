@@ -3,19 +3,25 @@
 // This file is automatically updated during development when running `dev.ts`.
 
 import config from "./deno.json" assert { type: "json" };
-import * as $0 from "./routes/[name].tsx";
-import * as $1 from "./routes/api/joke.ts";
+import * as $0 from "./routes/api/trpc/[path].ts";
+import * as $1 from "./routes/auth/oauthreceiver.tsx";
 import * as $2 from "./routes/index.tsx";
 import * as $$0 from "./islands/Counter.tsx";
+import * as $$1 from "./islands/Joke.tsx";
+import * as $$2 from "./islands/SupabaseButton.tsx";
+import * as $$3 from "./islands/SupabaseOAuthReceiver.tsx";
 
 const manifest = {
   routes: {
-    "./routes/[name].tsx": $0,
-    "./routes/api/joke.ts": $1,
+    "./routes/api/trpc/[path].ts": $0,
+    "./routes/auth/oauthreceiver.tsx": $1,
     "./routes/index.tsx": $2,
   },
   islands: {
     "./islands/Counter.tsx": $$0,
+    "./islands/Joke.tsx": $$1,
+    "./islands/SupabaseButton.tsx": $$2,
+    "./islands/SupabaseOAuthReceiver.tsx": $$3,
   },
   baseUrl: import.meta.url,
   config,
