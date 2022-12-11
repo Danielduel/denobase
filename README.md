@@ -28,7 +28,9 @@ SUPABASE_API_ADMIN=service api key from the settings/api
 
 2. Prisma
 
-I will submit a boilerplate that init gives, but you will have to kickoff prisma with
+I will submit a boilerplate that init gives, but you will have to kickoff prisma.
+
+But first... push your code to the repository, it will make prisma setup easier.
 
 * `deno run --unstable -A npm:prisma@^4.5 generate --data-proxy`
 * `deno run -A npm:prisma@^4.5 db push`
