@@ -7,5 +7,13 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("PRISMA_DB_URI")
+  url      = env("PRISMA_DB_URI") // for running env
+  // url      = env("SUPABASE_DB_URI") // for pushing schema
+}
+
+model User {
+  sId                         String     @unique // supabase id
+  id                          String     @id @default(uuid())
+
+  @@unique([id])
 }

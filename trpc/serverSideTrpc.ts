@@ -8,4 +8,4 @@ export const getTrpcCallerContext = <D>(opts: Opts<D>): TrpcCallerContext => {
   return {
     req: opts.req
   }
-}
+};

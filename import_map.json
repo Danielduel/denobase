@@ -2,6 +2,7 @@
   "imports": {
     "$fresh/": "./fresh/",
     "std/": "https://deno.land/std@0.163.0/",
+    "crypto/": "https://deno.land/std@0.163.0/crypto/",
     "preact": "https://esm.sh/preact@10.11.0",
     "preact/": "https://esm.sh/preact@10.11.0/",
     "preact-render-to-string": "https://esm.sh/*preact-render-to-string@5.2.4",
