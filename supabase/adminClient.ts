@@ -2,6 +2,7 @@ import { config } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
 import { supabaseInit } from "./init.ts";
 import { getSupabaseCookies } from "./cookie.ts";
+import { getPublicClient } from "./publicClient.ts";
 
 const envVars = await config();
 const supabaseUrl = Deno.env.get("SUPABASE_DB_URI") ?? envVars.SUPABASE_DB_URI;
@@ -31,4 +32,4 @@ export const getPublicSupabaseCreds = () => {
   };
 }
 
-await supabaseInit(adminClient);
+await supabaseInit(adminClient, getPublicClient(getPublicSupabaseCreds()));
