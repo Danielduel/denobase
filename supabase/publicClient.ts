@@ -1,18 +1,14 @@
 import { createClient, Session } from "@supabase/supabase-js";
+import type { SupabasePublicClientCreds } from "./sdk/types.ts";
 
 export type SupabaseAuthSession = Session;
 
-export type SupabaseCreds = {
-  supabaseUrl: string;
-  supabasePublicKey: string;
-};
-
 export const getPublicClient = ({
-  supabaseUrl,
+  supabaseProjectUrl,
   supabasePublicKey,
-}: SupabaseCreds) =>
+}: SupabasePublicClientCreds) =>
   createClient(
-    supabaseUrl,
+    supabaseProjectUrl,
     supabasePublicKey,
   );
 
