@@ -1,4 +1,5 @@
 .env
+.supabase.env
 
 package.json
 package-lock.json
